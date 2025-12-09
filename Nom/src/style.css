@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+html, body {
+  @apply w-full h-full p-0 m-0;
+}
+
+#app {
+  @apply bg-base-300;
+  @apply flex flex-col justify-center items-center w-full h-full;
+}
+
