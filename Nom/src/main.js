@@ -19,7 +19,7 @@ app.innerHTML = `
 </div>
 `
 
-async function getData(poke){
+/* async function getData(country){
   try{
     const response = await fetch(``)
     if (response.status !== 200){
@@ -34,4 +34,22 @@ async function getData(poke){
   }
 }
 
-getData("Squirtle")
+getData("country") */
+
+async function all_country(){
+  try{
+    const response = await fetch(`https://api.nobelprize.org/2.1/nobelPrizes`)
+    if (response.status !== 200){
+      throw new Error(response)
+    } else {
+      const data = await response.json();
+      document.querySelector("body").insertAdjacentHTML("afterbegin", `<p>${data}</p>`)
+      console.log(data)
+    }
+  }
+  catch (error){
+    console.log(error)
+  }
+}
+
+all_country()
