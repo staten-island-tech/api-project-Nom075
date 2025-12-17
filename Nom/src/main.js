@@ -1,6 +1,6 @@
-import './style.css'
+import "./style.css";
 
-const app = document.querySelector('#app');
+const app = document.querySelector("#app");
 
 app.innerHTML = `
 <div class="card bg-base-100 w-96 shadow-sm">
@@ -17,7 +17,7 @@ app.innerHTML = `
     </div>
   </div>
 </div>
-`
+`;
 
 /* async function getData(country){
   try{
@@ -36,20 +36,19 @@ app.innerHTML = `
 
 getData("country") */
 
-async function all_country(){
-  try{
-    const response = await fetch(`https://api.nobelprize.org/2.1/nobelPrizes`)
-    if (response.status !== 200){
-      throw new Error(response)
+async function all_games() {
+  try {
+    const response = await fetch(`https://www.gamerpower.com/api/giveaways`);
+    if (response.status !== 200) {
+      throw new Error(response);
     } else {
       const data = await response.json();
-      document.querySelector("body").insertAdjacentHTML("afterbegin", `<p>${data}</p>`)
-      console.log(data)
+      document.querySelector("body").insertAdjacentHTML("afterbegin", `<p>${data}</p>`);
+      console.log(data);
     }
-  }
-  catch (error){
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
 }
 
-all_country()
+all_games();
