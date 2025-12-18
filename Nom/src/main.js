@@ -19,36 +19,54 @@ app.innerHTML = `
 </div>
 `;
 
-/* async function getData(country){
-  try{
-    const response = await fetch(``)
-    if (response.status !== 200){
-      throw new Error(response)
-    } else {
-      const data = await response.json();
-      document.getElementById("the Id").textContent = data
-    }
-  }
-  catch (error){
-    console.log(error)
-  }
-}
+const deckID = "ih8tge5x22di"
+await fetch(`https://www.deckofcardsapi.com/api/deck/${deckID}/return/`)
 
-getData("country") */
-
-async function all_games() {
+/* async function cards() {
   try {
-    const response = await fetch(`https://www.gamerpower.com/api/giveaways`);
+    const response = await fetch(`https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`);
     if (response.status !== 200) {
       throw new Error(response);
     } else {
-      const data = await response.json();
-      document.querySelector("body").insertAdjacentHTML("afterbegin", `<p>${data}</p>`);
-      console.log(data);
+      const deck = await response.json();
+      document.querySelector("body").insertAdjacentHTML("afterbegin", `<p>${deck}</p>`);
+      console.log(deck);
     }
   } catch (error) {
     console.log(error);
   }
 }
 
-all_games();
+cards(); */
+const response = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
+const all_cards = await response.json()
+console.log(all_cards)
+document.querySelector("body").insertAdjacentHTML("afterbegin", `<p>${all_cards}</p>`)
+
+
+//Get a deck: https://www.deckofcardsapi.com/api/deck/new/
+//Draw a card: https://www.deckofcardsapi.com/api/deck/<<deck_id>>/draw/?count=2
+//Shuffle ALL: https://www.deckofcardsapi.com/api/deck/<<deck_id>>/shuffle/
+//Shuffle all remain: https://www.deckofcardsapi.com/api/deck/<<deck_id>>/shuffle/
+
+//PILES
+
+//Add to a pile: https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/add/?cards=AS,2S
+//Shuffle piles: https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/shuffle/
+//See pile cards: https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/list/
+
+
+/* DRAWING FROM A PILE
+https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/draw/?cards=AS
+https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/draw/?count=2
+https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/draw/bottom/
+https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/draw/random/ 
+*/
+
+
+  /* RETURN TO DECK
+https://www.deckofcardsapi.com/api/deck/<<deck_id>>/return/
+https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/return/
+https://www.deckofcardsapi.com/api/deck/<<deck_id>>/return/?cards=AS,2S
+https://www.deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/return/?cards=AS,2S 
+*/
