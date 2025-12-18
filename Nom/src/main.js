@@ -20,28 +20,33 @@ app.innerHTML = `
 `;
 
 const deckID = "ih8tge5x22di"
-await fetch(`https://www.deckofcardsapi.com/api/deck/${deckID}/return/`)
+await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/return/`)
 
-/* async function cards() {
+async function run(data_link) {
   try {
-    const response = await fetch(`https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`);
+    const response = await fetch(`${data_link}`);
     if (response.status !== 200) {
       throw new Error(response);
     } else {
-      const deck = await response.json();
-      document.querySelector("body").insertAdjacentHTML("afterbegin", `<p>${deck}</p>`);
-      console.log(deck);
+      const value = await response.json();
+      return (value)
     }
   } catch (error) {
     console.log(error);
   }
 }
 
-cards(); */
-const response = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
-const all_cards = await response.json()
+const all_cards = await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
 console.log(all_cards)
-document.querySelector("body").insertAdjacentHTML("afterbegin", `<p>${all_cards}</p>`)
+const first_card = all_cards.cards[0]
+console.log(first_card.image)
+document.querySelector("body").insertAdjacentHTML("afterbegin", 
+  `
+  <p>${first_card.value} of ${first_card.suit}</p>
+  <img src = ${first_card.image}/>
+  
+  
+  `) 
 
 
 //Get a deck: https://www.deckofcardsapi.com/api/deck/new/
