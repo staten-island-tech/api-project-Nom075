@@ -2,22 +2,20 @@ import "./style.css";
 
 const app = document.querySelector("#app");
 
-app.innerHTML = `
-<div class="card bg-base-100 w-96 shadow-sm">
-  <figure>
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-      alt="Shoes" />
-  </figure>
-  <div class="card-body">
-    <h2 class="card-title">Card Title</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-    <div class="card-actions justify-end">
-      <button class="btn btn-primary">Buy Now</button>
+function centerDeck(Name, Image){
+  app.innerHTML = `
+  <div class="card bg-base-100 w-96 h-100 shadow-sm">
+    <figure>
+      <img
+        src=${Image}
+        alt="Card" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">${Name}</h2>
     </div>
   </div>
-</div>
-`;
+  `
+}
 
 const deckID = "ih8tge5x22di"
 await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/return/`)
@@ -36,17 +34,22 @@ async function run(data_link) {
   }
 }
 
+await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/shuffle/`)
 const all_cards = await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
-console.log(all_cards)
-const first_card = all_cards.cards[0]
-console.log(first_card.image)
-document.querySelector("body").insertAdjacentHTML("afterbegin", 
-  `
-  <p>${first_card.value} of ${first_card.suit}</p>
-  <img src = ${first_card.image}/>
-  
-  
-  `) 
+const card = all_cards.cards[0]
+const card_name = (card.value + " of " + card.suit)
+centerDeck(card_name, card.image)
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "e" || event.key === "E") {
+    if (card.value === "JACK"){
+      console.log("SLAPPED!")
+    } else{
+      console.log("WRONG SLAP U DUMBASS")
+    }
+  }
+});
+
 
 
 //Get a deck: https://www.deckofcardsapi.com/api/deck/new/
