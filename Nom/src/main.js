@@ -12,6 +12,7 @@ function centerDeck(Name, Image){
     </figure>
     <div class="card-body">
       <h2 class="card-title">${Name}</h2>
+      <button class = "drawNew">Draw 1</button>
     </div>
   </div>
   `
@@ -50,7 +51,11 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-
+/* document.querySelector(".drawNew").addEventListener("click", async function(){
+  await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/shuffle/`)
+  all_cards = await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
+})
+ */
 
 //Get a deck: https://www.deckofcardsapi.com/api/deck/new/
 //Draw a card: https://www.deckofcardsapi.com/api/deck/<<deck_id>>/draw/?count=2
