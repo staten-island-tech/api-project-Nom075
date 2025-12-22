@@ -6,7 +6,7 @@ function centerDeck(Name, Image){
   app.innerHTML = `
   <div class="card bg-base-100 w-96 h-100 shadow-sm">
     <figure>
-      <img
+      <img class = "m-5 h-70"
         src=${Image}
         alt="Card" />
     </figure>
@@ -16,10 +16,8 @@ function centerDeck(Name, Image){
     </div>
   </div>
   `
+  buttons()
 }
-
-const deckID = "ih8tge5x22di"
-await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/return/`)
 
 async function run(data_link) {
   try {
@@ -35,11 +33,33 @@ async function run(data_link) {
   }
 }
 
-await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/shuffle/`)
-const all_cards = await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
-const card = all_cards.cards[0]
-const card_name = (card.value + " of " + card.suit)
-centerDeck(card_name, card.image)
+async function drawCard(amount){
+  await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/shuffle/`)
+  const response = await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=${amount}`)
+  const card = response.cards[0]
+  return (card)
+}
+
+function buttons(){
+  document.querySelector(".drawNew").addEventListener("click", async function(){
+  const grabbed_card = await drawCard(1)
+  const card_name = grabbed_card.value + " of " + grabbed_card.suit
+  centerDeck(card_name, grabbed_card.image)
+})
+}
+
+const deckID = "ih8tge5x22di"
+
+//reset deck
+await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/return/`)
+
+//get blank card
+const CardBack = "https://www.deckofcardsapi.com/static/img/back.png"
+
+centerDeck("No Cards... Draw one!", CardBack)
+
+
+
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "e" || event.key === "E") {
@@ -51,11 +71,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-/* document.querySelector(".drawNew").addEventListener("click", async function(){
-  await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/shuffle/`)
-  all_cards = await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
-})
- */
 
 //Get a deck: https://www.deckofcardsapi.com/api/deck/new/
 //Draw a card: https://www.deckofcardsapi.com/api/deck/<<deck_id>>/draw/?count=2
