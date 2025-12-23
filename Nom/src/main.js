@@ -4,17 +4,66 @@ const app = document.querySelector("#app");
 
 function centerDeck(Name, Image){
   app.innerHTML = `
-  <div class="card bg-base-100 w-96 h-100 shadow-sm">
+  <div class="card bg-base-100 w-96 h-100 mx-1000 shadow-sm">
     <figure>
-      <img class = "m-5 h-70"
+      <img class="m-5 h-70"
         src=${Image}
         alt="Card" />
     </figure>
     <div class="card-body">
       <h2 class="card-title">${Name}</h2>
-      <button class = "drawNew">Draw 1</button>
+      <button class="drawNew">Draw 1</button>
     </div>
   </div>
+
+  <div class="flex space-x-4 my-20">
+    
+  <div class="card bg-base-100 w-96 h-100 mx-10 shadow-sm" id=P1>
+    <figure>
+      <img class="m-5 h-70"
+        src=${CardBack}
+        alt="Card" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">Player1</h2>
+    </div>
+  </div>
+  
+  <div class="card bg-base-100 w-96 h-100 mx-10 shadow-sm" id=P2>
+    <figure>
+      <img class="m-5 h-70"
+        src=${CardBack}
+        alt="Card" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">Player2</h2>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 w-96 h-100 mx-10 shadow-sm" id=P3>
+    <figure>
+      <img class="m-5 h-70"
+        src=${CardBack}
+        alt="Card" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">Player3</h2>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 w-96 h-100 mx-10 shadow-sm" id=P4>
+    <figure>
+      <img class="m-5 h-70"
+        src=${CardBack}
+        alt="Card" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">Player4</h2>
+    </div>
+  </div>
+  
+  </div>
+  
   `
   buttons()
 }
