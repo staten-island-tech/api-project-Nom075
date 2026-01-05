@@ -4,7 +4,7 @@ const app = document.querySelector("#app");
 
 function centerDeck(Name, Image){
   app.innerHTML = `
-  <div class="card bg-base-100 w-96 h-100 mx-1000 shadow-sm">
+  <div class="card bg-base-100 w-96 h-120 mx-1000 shadow-sm">
     <figure>
       <img class="m-5 h-70"
         src=${Image}
@@ -12,7 +12,8 @@ function centerDeck(Name, Image){
     </figure>
     <div class="card-body">
       <h2 class="card-title">${Name}</h2>
-      <button class="drawNew">Draw 1</button>
+      <button class = "drawNew">Draw 1</button>
+      <p>Cards in this pile:</p>
     </div>
   </div>
 
@@ -26,6 +27,7 @@ function centerDeck(Name, Image){
     </figure>
     <div class="card-body">
       <h2 class="card-title">Player1</h2>
+      <p> Remaining Cards:</p>
     </div>
   </div>
   
@@ -102,8 +104,14 @@ const deckID = "ih8tge5x22di"
 //reset deck
 await run(`https://www.deckofcardsapi.com/api/deck/${deckID}/return/`)
 
+//game set up
+
+await run()
+
 //get blank card
 const CardBack = "https://www.deckofcardsapi.com/static/img/back.png"
+
+
 
 centerDeck("No Cards... Draw one!", CardBack)
 
