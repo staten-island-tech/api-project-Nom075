@@ -26,11 +26,12 @@ const deals = await run(
   `https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=9999`
 )
 
-deals.forEach((game) => {
+function mainPage(){
+  deals.forEach((game) => {
   dealContainer.insertAdjacentHTML(
     "beforeend",
     `
-    <div class="card bg-base-100 w-80 h-80 shadow-sm">
+    <div class="deal-card card bg-base-100 w-80 h-80 shadow-sm">
       <figure>
         <img src="${game.thumb}" alt="deal" class="w-full" />
       </figure>
@@ -40,13 +41,35 @@ deals.forEach((game) => {
           <p>Normal price: ${game.normalPrice}</p>
           <p>Discount price: ${game.salePrice}</p>
         </div>
-        <div class="card-actions flex flex-row items-right justify-end">
-          <button class="btn btn-outline btn-info">More info! OMG!</button>
+        <div class="card-actions flex flex-row justify-center">
+          <button class="more-info btn btn-outline btn-info">More info! OMG!</button>
         </div>
       </div>
     </div>
     `
   )
 })
+}
+
+function moreInfoButtons(){
+  const all_btn = dealContainer.querySelectorAll(".more-info")
+  all_btn.forEach((btn) => {
+    btn.addEventListener("click", function(){
+      const clicked_card = btn.closest(".deal-card")
+      displayFullDeal(clicked_card)
+    })
+  })
+
+}
+
+function displayFullDeal(card){
+  console.log(card)
+}
+
+
+mainPage()
+moreInfoButtons()
+
+
 
 
