@@ -17,24 +17,32 @@ async function run(data_link) {
   }
 }
 
+const dealContainer = document.createElement("div")
+dealContainer.className = "flex flex-wrap gap-10 p-10 w-full h-full overflow-scroll justify-center items-center"
+app.insertAdjacentElement("afterbegin", dealContainer)
+
+
 const deals = await run(
   `https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=9999`
 )
 
 deals.forEach((game) => {
-  app.insertAdjacentHTML(
+  dealContainer.insertAdjacentHTML(
     "beforeend",
     `
-    <div class="card bg-base-100 w-80">
+    <div class="card bg-base-100 w-80 h-80 shadow-sm">
       <figure>
-        <img
-          class="w-50 h-50 mx-auto"
-          src="${game.thumb}"
-          alt="deal"
-        />
+        <img src="${game.thumb}" alt="deal" class="w-full" />
       </figure>
       <div class="card-body">
-        <h2 class="card-title text-sm">${game.title}</h2>
+        <h2 class="card-title">${game.title}</h2>
+        <div class="flex flex-col">
+          <p>Normal price: ${game.normalPrice}</p>
+          <p>Discount price: ${game.salePrice}</p>
+        </div>
+        <div class="card-actions flex flex-row items-right justify-end">
+          <button class="btn btn-outline btn-info">More info! OMG!</button>
+        </div>
       </div>
     </div>
     `
