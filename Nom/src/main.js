@@ -27,18 +27,20 @@ app.insertAdjacentElement("afterbegin", tool_bar)
 
 tool_bar.insertAdjacentHTML("afterbegin", 
   `
-    <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar bg-base-100 shadow-sm z-2 rounded-2xl">
       <div class="flex-1">
         <a class="btn btn-ghost text-xl">CheapShark Deals</a>
       </div>
       <div class="flex gap-2">
-        <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+        <input type="text" placeholder="Search" class="search input input-bordered w-24 md:w-auto rounded-xl" />
         <div class="dropdown dropdown-end">
         </div>
       </div>
     </div>
   `
 )
+
+search()
 
 
 const deals = await run(
@@ -53,7 +55,7 @@ function mainPage(){
   dealContainer.insertAdjacentHTML(
     "beforeend",
     `
-    <div class="deal-card card bg-base-100 w-80 h-80 shadow-sm">
+    <div class="deal-card card bg-base-100 w-80 h-80 shadow-sm z-1">
       <figure>
         <img src="${game.thumb}" alt="deal" class="w-full" />
       </figure>
@@ -63,7 +65,7 @@ function mainPage(){
           <p>Price: <s>$${game.normalPrice}</s> <b>$${game.salePrice}</b></p>
         </div>
         <div class="card-actions flex flex-row justify-center">
-          <button class="more-info btn btn-outline btn-info">More info! OMG!</button>
+          <button class="more-info btn btn-outline btn-info rounded-xl">More info! OMG!</button>
         </div>
       </div>
     </div>
@@ -73,6 +75,48 @@ function mainPage(){
   moreInfoButtons()
 
 }
+
+function search(){
+  const input = document.querySelector('.search');
+      input.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+          filter(input.value)
+        }
+      });
+}
+
+async function filter(searched){
+  const data = await run(`https://www.cheapshark.com/api/1.0/deals?title=${searched}`)
+  dealContainer.innerHTML = ""
+  data.forEach((deal) => {
+    console.log(deal)
+    if (deal.isOnSale === "1"){
+      dealContainer.insertAdjacentHTML(
+        "beforeend",
+        `
+        <div class="deal-card card bg-base-100 w-80 h-80 shadow-sm z-1">
+          <figure>
+            <img src="${deal.thumb}" alt="deal" class="w-full" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">${deal.title}</h2>
+            <div class="flex flex-col">
+              <p>Price: <s>$${deal.normalPrice}</s> <b>$${deal.salePrice}</b></p>
+            </div>
+            <div class="card-actions flex flex-row justify-center">
+              <button class="more-info btn btn-outline btn-info rounded-xl">More info! OMG!</button>
+            </div>
+          </div>
+        </div>
+        `
+    )
+    }
+
+  })
+  moreInfoButtons()
+}
+
+
 
 
 
