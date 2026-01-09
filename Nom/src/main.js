@@ -1,6 +1,7 @@
 import "./style.css";
 
 const app = document.querySelector("#app");
+const pageNumber = 0
 
 async function run(data_link) {
   try {
@@ -25,11 +26,18 @@ const tool_bar = document.createElement("div")
 tool_bar.className = "flex flex-col gap-10 p-10 w-full h-20 items-center"
 app.insertAdjacentElement("afterbegin", tool_bar)
 
+
+
 tool_bar.insertAdjacentHTML("afterbegin", 
   `
-    <div class="navbar bg-base-100 shadow-sm z-2 rounded-2xl">
+    <div class="navbar bg-base-100 shadow-sm z-2 rounded-2xl gap-10">
       <div class="flex-1">
         <a class="btn btn-ghost text-xl">CheapShark Deals</a>
+      </div>
+      <div class="join z-2">
+        <button class="join-item btn">«</button>
+        <button class="join-item btn">Page 22</button>
+        <button class="join-item btn">»</button>
       </div>
       <div class="flex gap-2">
         <input type="text" placeholder="Search" class="search input input-bordered w-24 md:w-auto rounded-xl" />
@@ -40,11 +48,8 @@ tool_bar.insertAdjacentHTML("afterbegin",
   `
 )
 
-search()
-
-
 const deals = await run(
-  `https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=9999`
+  `https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=9999&pageNumber=0`
 )
 
 function mainPage(){
@@ -75,6 +80,7 @@ function mainPage(){
   moreInfoButtons()
 
 }
+
 
 function search(){
   const input = document.querySelector('.search');
@@ -114,6 +120,7 @@ async function filter(searched){
 
   })
   moreInfoButtons()
+  search()
 }
 
 
@@ -165,69 +172,6 @@ async function displayFullDeal(card){
     </div>
     `
 
-/*     {internalName: 'DISCOELYSIUMTHEFINALCUT', title: 'Disco Elysium - The Final Cut', metacriticLink: '/game/disco-elysium-the-final-cut/', dealID: 'Uk9pH81%2BgPUwbkh9YzwMnYLT%2B%2FEaktqN8AgwMr6Y2wQ%3D', storeID: '1', …}
-dealID
-: 
-"Uk9pH81%2BgPUwbkh9YzwMnYLT%2B%2FEaktqN8AgwMr6Y2wQ%3D"
-dealRating
-: 
-"9.6"
-gameID
-: 
-"227942"
-internalName
-: 
-"DISCOELYSIUMTHEFINALCUT"
-isOnSale
-: 
-"1"
-lastChange
-: 
-1767640030
-metacriticLink
-: 
-"/game/disco-elysium-the-final-cut/"
-metacriticScore
-: 
-"97"
-normalPrice
-: 
-"39.99"
-releaseDate
-: 
-1617062400
-salePrice
-: 
-"9.99"
-savings
-: 
-"75.018755"
-steamAppID
-: 
-"632470"
-steamRatingCount
-: 
-"53977"
-steamRatingPercent
-: 
-"92"
-steamRatingText
-: 
-"Very Positive"
-storeID
-: 
-"1"
-thumb
-: 
-"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/632470/capsule_231x87.jpg?t=1766855203"
-title
-: 
-"Disco Elysium - The Final Cut"
-
- */
-
-  
-
   if (Deal.isOnSale === "1"){
     document.querySelector(".badges").insertAdjacentHTML("afterbegin", `<div class="badge badge-warning">On Sale!</div>`)
   } else {
@@ -251,3 +195,4 @@ title
 
 
 mainPage()
+search()
