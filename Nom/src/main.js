@@ -42,6 +42,7 @@ if (newUser === null){
       <p class="py-2">MegaBack Chaojie: For emotional support.</p>
       <p class="py-2">Darwen Zoo: Uh?</p>  
       <p class="py-2">ChatGPT: For help on how things work. Basically wrote dark mode logic because I am lazy.</p> 
+      <p class="py-2">DaisyUI: For the free UI templates which look amazing.</p> 
       <p class="py-2">Mr. Whalen: For the project and giving me 100 when he grades this.</p> 
       <p class="py-2">Grayton: ... I made this?</p>
 
