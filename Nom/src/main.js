@@ -67,7 +67,7 @@ if (newUser === null){
 
 async function run(data_link) {
   try {
-    dealContainer.innerHTML = `<span class="loading loading-dots loading-xl bg-white darklightB"></span>`
+    dealContainer.innerHTML = `<span class="loading loading-dots loading-xl bg-black darklightB"></span>`
     const response = await fetch(`${data_link}`);
     dealContainer.innerHTML = ""
     if (response.status !== 200) {
