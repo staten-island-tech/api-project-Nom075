@@ -352,8 +352,8 @@ async function displayFullDeal(card){
           <h3 class = "text-black text-lg darklightT">Full Statistics:</h3>
         </div>
         <div class="flex flex-col items-start gap-3">
-          <p class = "text-black darklightT">Normal Price: ${Deal.normalPrice}</p>
-          <p class = "text-black darklightT">Sales Price: ${Deal.salePrice}</p>
+          <p class = "text-black darklightT">Normal Price: $${Deal.normalPrice}</p>
+          <p class = "text-black darklightT">Sales Price: $${Deal.salePrice}</p>
           <p class = "text-black darklightT">You save ($): $${(Math.round(((Deal.normalPrice - Deal.salePrice)*10)))/10}</p>
           <p class = "text-black darklightT">You save (%): ${Math.round(Deal.savings)}%</p>
           <p class = "text-black darklightT">Release Date: ${new Date((Deal.releaseDate * 1000))}</p>
